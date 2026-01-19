@@ -1,4 +1,8 @@
 
+
+
+using UnityEngine;
+
 public class EntityState
 {
     // The member is accessible inside the same class and
@@ -6,10 +10,13 @@ public class EntityState
     // But not from other scripts.
     protected StateMachine stateMachine;
 
+    protected string stateName;
+
     // Constructor
-    public EntityState(StateMachine stateMachine)
+    public EntityState(StateMachine stateMachine, string stateName)
     {
         this.stateMachine = stateMachine;
+        this.stateName = stateName;
     }
 
     // virtual means this method provides a default implementation,
@@ -20,6 +27,8 @@ public class EntityState
         // Called ONCE when this state becomes the active state.
         // Use this to initialize state-specific logic
         // (start animations, reset timers, set variables).
+
+        Debug.Log("Entering state: " + stateName);
     }
 
     public virtual void Update()
@@ -33,6 +42,8 @@ public class EntityState
         // The Player has access to all Unity-specific functionality,
         // and it forwards the Update call to the active state.
 
+        Debug.Log("Updating state: " + stateName);
+
     }
 
     public virtual void Exit()
@@ -40,6 +51,8 @@ public class EntityState
         // Called ONCE when this state is about to be exited.
         // Use this to clean up before switching to another state
         // (stop animations, reset values, remove listeners).
+
+        Debug.Log("Exiting state: " + stateName);
     }
 
 }
